@@ -7,4 +7,7 @@ require('dotenv').config(); // Load environment variables
 const typeDefs = require('./src/schema/user.gql');
 const resolvers = require('./src/resolvers/user.js');
 
-// ... (We'll fill in the rest later)
+// ... (We'll add in the rest later)
+
+// activate microservices
+
