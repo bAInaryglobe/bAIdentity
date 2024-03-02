@@ -1,0 +1,14 @@
+version: '3'
+services:
+  user-backend:
+    build: .
+    ports:
+      - "8000:3000"
+    environment:
+      - DB_HOST=user-db
+      - DB_USERNAME=myuser
+      - DB_PASSWORD=mypassword
+  user-db:
+    image: postgres:12
+    environment:
+      - POSTGRES_PASSWORD=mypassword
