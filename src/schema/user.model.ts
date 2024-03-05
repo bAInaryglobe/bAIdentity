@@ -15,6 +15,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    twofa: {
+        type: String,
+        required: false
+    }
+
     // ... other fields as needed
 });
 
