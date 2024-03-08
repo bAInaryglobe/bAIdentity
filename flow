@@ -1,0 +1,28 @@
+project-root/
+  - models/                  # For your Mongoose models
+    - user.model.ts
+    - product.model.ts
+    - ...
+  - controllers/             # Handles request logic 
+    - user.controller.js
+    - product.controller.ts
+    - ...
+  - routes/                  # Defines API endpoints
+    - user.routes.ts
+    - product.routes.ts
+    - ...
+  - services/                # Reusable business logic (optional) 
+  - middleware/              # Custom middleware functions
+    - auth.middleware.ts
+    - error-handler.middleware.ts
+    - ...
+  - config/                  # Configuration files
+    - database.ts
+  - app.js                   # Main application file
+  - package.json
+
+
+
+
+
+- ...
