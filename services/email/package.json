@@ -1,0 +1,17 @@
+{
+  "name": "email",
+  "version": "1.0.0",
+  "description": "email",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "email"
+  ],
+  "author": "bAInaryglobe",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1579.0"
+  }
+}
