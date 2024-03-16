@@ -8,16 +8,35 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const mongoose = require('mongoose');
-require('dotenv').config(); // Load environment variables
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importDefault(require("mongoose"));
+const dotenv_1 = __importDefault(require("dotenv")); // Prefer the 'import' syntax
+dotenv_1.default.config(); // Load environment variables
 const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield mongoose.connect(process.env.MONGODB_URI);
+        yield mongoose_1.default.connect(process.env.MONGODB_URI || ''); // Handle missing URI
         console.log('MongoDB Connected!');
     }
-    catch (err) {
+    catch (err) { // Generalize the error type
         console.error(err);
-        process.exit(1); // Exit with an error
+        process.exit(1);
     }
 });
-module.exports = connectDB;
+exports.default = connectDB;
+// const mongoose = require('mongoose');
+// require('dotenv').config(); // Load environment variables
+//
+// const connectDB = async () => {
+//     try {
+//         await mongoose.connect(process.env.MONGODB_URI);
+//         console.log('MongoDB Connected!');
+//     } catch (err) {
+//         console.error(err);
+//         process.exit(1); // Exit with an error
+//     }
+// }
+//
+// module.exports = connectDB;
