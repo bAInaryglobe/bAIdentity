@@ -1,0 +1,14 @@
+{
+  "name": "vexeroo",
+  "version": "1.0.0",
+  "description": "vexeroo",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "vexeroo"
+  ],
+  "author": "bAInaryglobe",
+  "license": "ISC"
+}
