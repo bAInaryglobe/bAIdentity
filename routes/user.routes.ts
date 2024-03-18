@@ -1,4 +1,9 @@
 import express, { Router, Request, Response } from 'express';
+import { User } from '../models/user'; // Assuming you have a User model
+
+interface ErrorResponse {
+    error: string;
+}
 
 const router: Router = express.Router();
 
@@ -11,6 +16,7 @@ const router: Router = express.Router();
  *       200:
  *         description: Success
  */
+
 router.get('/', (req: Request, res: Response) => {
     // ... your user fetching logic (add type definitions as needed)
 });
