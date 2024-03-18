@@ -50,30 +50,37 @@ function requiresMultiFactorAuth(req, res, next) {
     // ... your MFA logic
 }
 exports.requiresMultiFactorAuth = requiresMultiFactorAuth;
-// ... your User interface
-// Middleware for basic authentication
-function isAuthenticated(req, res, next) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const sessionToken = req.cookies.sessionToken; // Example: retrieve from cookie
-        if (!sessionToken) {
-            return res.status(401).json({ error: 'Unauthorized' });
-        }
-        try {
-            const session = yield session_model_1.default.findOne({ token: sessionToken });
-            if (!session) {
-                return res.status(401).json({ error: 'Unauthorized' });
-            }
-            // Fetch the associated user:
-            req.user = yield UserModel.findById(session.userId); // Assuming you have a User model
-            next(); // Proceed if the session is valid
-        }
-        catch (error) {
-            console.error('Session Error:', error);
-            res.status(500).json({ error: 'Internal server error' });
-        }
-    });
-}
-exports.isAuthenticated = isAuthenticated;
+//
+//
+// import { Request, Response, NextFunction } from 'express';
+// import SessionModel from './session.model'; // Assuming your session model file
+//
+// // ... your User interface
+//
+// // Middleware for basic authentication
+// async function isAuthenticated(req: Request, res: Response, next: NextFunction) {
+//     const sessionToken = req.cookies.sessionToken; // Example: retrieve from cookie
+//
+//     if (!sessionToken) {
+//         return res.status(401).json({ error: 'Unauthorized' });
+//     }
+//
+//     try {
+//         const session = await SessionModel.findOne({ token: sessionToken });
+//
+//         if (!session) {
+//             return res.status(401).json({ error: 'Unauthorized' });
+//         }
+//
+//         // Fetch the associated user:
+//         req.user = await UserModel.findById(session.userId); // Assuming you have a User model
+//
+//         next(); // Proceed if the session is valid
+//     } catch (error) {
+//         console.error('Session Error:', error);
+//         res.status(500).json({ error: 'Internal server error' });
+//     }
+// }
 // ... your other middleware functions (isAdmin, requiresMultiFactorAuth)
 // import { Request, Response, NextFunction } from 'express';
 //
