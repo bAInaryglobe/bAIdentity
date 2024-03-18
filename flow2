@@ -1,0 +1,32 @@
+backend/
+├── .env                        # Environment variables
+├── .dockerignore               # Docker image build exclusions
+├── .gitignore
+├── Dockerfile                  # Docker image instructions
+├── docker-compose.yml          # For multi-container orchestration
+├── README.md
+├── package.json
+├── tsconfig.json               # TypeScript configuration
+├── scripts/
+
+
+
+backend/microservices/vexeroo/
+    ├── src/
+    │   ├── controllers/
+    │   ├── models/
+    │   ├── routes/
+    │   ├── services/            # Business logic layer
+    │   └── app.ts               # Application entry point
+    ├── .env                     # Microservice-specific env vars
+    ├── package.json
+    ├── tsconfig.json
+    └── Dockerfile
+
+
+
+
+
+
+
+
