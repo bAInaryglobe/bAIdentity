@@ -209,3 +209,39 @@ export { isAuthenticated, isAdmin, requiresMultiFactorAuth };
 //
 
 // export { isAuthenticated, isAdmin, requiresMultiFactorAuth };
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//
+// import mongoose, { Schema, Document } from 'mongoose';
+// import bcrypt from 'bcrypt';
+
+// ... other imports and interfaces
+
+const userSchema = new Schema<IUser>({
+    // ... your existing schema fields ...
+});
+
+// Hash password before saving
+userSchema.pre('save', async function(next) {
+    // ... your existing password hashing logic ...
+
+    // Update lastLogin (only if user is already present in the database)
+    if (this._id) {
+        this.lastLogin = new Date();
+    }
+    next();
+});
+
+const User = mongoose.model<IUser>('User', userSchema);
+export default User;
