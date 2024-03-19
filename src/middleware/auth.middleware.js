@@ -13,7 +13,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.requiresMultiFactorAuth = exports.isAdmin = exports.isAuthenticated = void 0;
-const session_model_1 = __importDefault(require("./session.model")); // Assuming your session model file
+const session_model_1 = __importDefault(require("./session.model"));
+const user_model_1 = __importDefault(require("./user.model")); // Assuming you have a User model
+const HttpError_1 = require("../utils/HttpError"); // Assuming an HttpError class
+//
+// interface User {
+//     // Define the properties of your User object
+//     username: string;
+//     email: string;
+//     // Add other properties as needed
+// }
 // Middleware for basic authentication
 function isAuthenticated(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -27,7 +36,7 @@ function isAuthenticated(req, res, next) {
                 return res.status(401).json({ error: 'Unauthorized' });
             }
             // Fetch the associated user:
-            req.user = yield UserModel.findById(session.userId); // Assuming you have a User model
+            req.user = yield user_model_1.default.findById(session.userId); // Assuming you have a User model
             next(); // Proceed if the session is valid
         }
         catch (error) {
@@ -37,17 +46,50 @@ function isAuthenticated(req, res, next) {
     });
 }
 exports.isAuthenticated = isAuthenticated;
-function isAuthenticated(req, res, next) {
-    // ... your authentication logic
-    // Access the User object on the request if needed: req.user as User
-}
-exports.isAuthenticated = isAuthenticated;
+// function isAuthenticated(req: Request, res: Response, next: NextFunction): void {
+//     // ... your authentication logic
+//     // Access the User object on the request if needed: req.user as User
+// }
+//
+// function isAdmin(req: Request, res: Response, next: NextFunction): void {
+//     // ... your admin check logic
+// }
+//
 function isAdmin(req, res, next) {
-    // ... your admin check logic
+    return __awaiter(this, void 0, void 0, function* () {
+        if (!req.user) { // Ensure user was fetched by 'isAuthenticated'
+            return next(new HttpError_1.HttpError(401, 'Unauthorized'));
+        }
+        if (!req.user.isAdmin) {
+            return next(new HttpError_1.HttpError(403, 'Forbidden'));
+        }
+        next();
+    });
 }
 exports.isAdmin = isAdmin;
+//
+// function requiresMultiFactorAuth(req: Request, res: Response, next: NextFunction): void {
+//     // ... your MFA logic
+// }
+// ... your User model, assuming it has 'mfaEnabled' property
 function requiresMultiFactorAuth(req, res, next) {
-    // ... your MFA logic
+    return __awaiter(this, void 0, void 0, function* () {
+        if (!req.user) {
+            return next(new HttpError_1.HttpError(401, 'Unauthorized'));
+        }
+        if (!req.user.mfaEnabled) {
+            // Handle the case where MFA is not enabled for the user
+            return next(new HttpError_1.HttpError(400, 'MFA not enabled for this user'));
+        }
+        // Placeholder - your MFA verification logic would go here
+        const mfaCode = req.body.mfaCode; // Assuming code sent in the request
+        if (!isValidMfaCode(mfaCode, req.user)) {
+            return next(new HttpError_1.HttpError(401, 'Invalid MFA code'));
+        }
+        // MFA success!
+        // ... update session or user data if needed
+        next();
+    });
 }
 exports.requiresMultiFactorAuth = requiresMultiFactorAuth;
 //
