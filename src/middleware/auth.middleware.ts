@@ -8,8 +8,6 @@ interface User {
     // Add other properties as needed
 }
 
-
-
 // Middleware for basic authentication
 async function isAuthenticated(req: Request, res: Response, next: NextFunction) {
     const sessionToken = req.cookies.sessionToken; // Example: retrieve from cookie
