@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import SessionModel from './session.model';
-import UserModel from './user.model'; // Assuming you have a User model
+import SessionModel from '../models/auth.models';
+import UserModel from '../models/user.model'; // Assuming you have a User model
 import { HttpError } from '../utils/HttpError'; // Assuming an HttpError class
 
 // import { Request, Response, NextFunction } from 'express';

@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.requiresMultiFactorAuth = exports.isAdmin = exports.isAuthenticated = void 0;
-const session_model_1 = __importDefault(require("./session.model"));
-const user_model_1 = __importDefault(require("./user.model")); // Assuming you have a User model
+const auth_models_1 = __importDefault(require("../models/auth.models"));
+const user_model_1 = __importDefault(require("../models/user.model")); // Assuming you have a User model
 const HttpError_1 = require("../utils/HttpError"); // Assuming an HttpError class
 //
 // interface User {
@@ -31,7 +31,7 @@ function isAuthenticated(req, res, next) {
             return res.status(401).json({ error: 'Unauthorized' });
         }
         try {
-            const session = yield session_model_1.default.findOne({ token: sessionToken });
+            const session = yield auth_models_1.default.findOne({ token: sessionToken });
             if (!session) {
                 return res.status(401).json({ error: 'Unauthorized' });
             }

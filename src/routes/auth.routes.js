@@ -29,7 +29,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importStar(require("express"));
 const passport_1 = __importDefault(require("passport"));
 const authController_1 = require("../controllers/authController");
-const auth_1 = require("../middleware/auth");
+const auth_middleware_1 = require("../middleware/auth.middleware");
 // # Configure the authentication routes
 // const authRouter: Router = express.Router();
 //
@@ -52,7 +52,7 @@ authRouter.post('/register', authController_1.registerUser);
 authRouter.post('/login', passport_1.default.authenticate('local'), authController_1.loginUser);
 // 2FA Routes (from 2fa.ts)
 const twoFARouter = (0, express_1.Router)();
-twoFARouter.post('/totp/setup', auth_1.ensureAuthenticated, setupTOTP);
+twoFARouter.post('/totp/setup', auth_middleware_1.ensureAuthenticated, setupTOTP);
 // ... (Add your 2FA routes here from 2fa.ts)
 authRouter.use('/2fa', twoFARouter);
 // Session Routes (if needed)

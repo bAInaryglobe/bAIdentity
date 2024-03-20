@@ -30,14 +30,15 @@
     "otplib": "^12.0.1",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
-    "supertest": "^6.3.4",
-    "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.0"
+    "supertest": "^6.3.4"
   },
   "devDependencies": {
     "@types/aws-sdk": "^2.7.0",
     "@types/bcrypt": "^5.0.2",
+    "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.11.28",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
     "typescript": "^5.4.2"
   }
 }

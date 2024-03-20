@@ -1,7 +1,7 @@
 import express, { Router, Request, Response, NextFunction } from 'express';
 import passport from 'passport';
 import { registerUser, loginUser } from '../controllers/authController';
-import { ensureAuthenticated } from '../middleware/auth';
+import { ensureAuthenticated } from '../middleware/auth.middleware';
 import sessionValidationMiddleware from '../middleware/session.middleware';
 
 
