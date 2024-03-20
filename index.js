@@ -18,6 +18,8 @@ dotenv_1.default.config();
 // ... your imports
 const auth_routes_1 = __importDefault(require("./src/routes/auth.routes"));
 const index_1 = __importDefault(require("./src/db/index")); // Assuming your connectDB function is within src/db
+// const app = express();
+// ... your Apollo Server setup
 // Environment-based Config (example)
 const isDevelopment = process.env.NODE_ENV === 'development';
 const PORT = process.env.PORT || 4000;
@@ -164,3 +166,34 @@ startServer();
 // }
 //
 // startServer();
+//
+//
+// import express from 'express';
+// import { ApolloServer } from 'apollo-server-express';
+// // ... other imports
+// import { connectDB } from './src/db/db';
+//
+// const app = express();
+// // ... Your Apollo Server setup
+//
+// async function startServer() {
+//     try {
+//         await connectDB();
+//
+//         // ... (rest of Apollo Server setup)
+//
+//         // Server Start with error handling
+//         app.listen(PORT, () => {
+//             console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`);
+//         }).on('error', (err) => {
+//             console.error('Server startup error:', err);
+//         });
+//
+//     } catch (error) {
+//         console.error('Unable to connect to database:', error);
+//     }
+// }
+//
+// startServer();
+//
+//
