@@ -9,4 +9,13 @@ const backendConstants = {
     API_PORT: process.env.PORT ? parseInt(process.env.PORT) : 3000,
     // ... more constants
 };
+//
+// // ... (rest of your constants file)
+//
+// const backendConstants: BackendConstants = {
+//     // ... your other constants ...
+//     DB_PORT: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 3000,
+//     API_PORT: process.env.PORT ? parseInt(process.env.PORT) : 3000,
+// };
+//
 exports.default = backendConstants;

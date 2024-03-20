@@ -5,6 +5,9 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.idea/copilot/chatSessions" />
       <excludeFolder url="file://$MODULE_DIR$/flows" />
+      <excludeFolder url="file://$MODULE_DIR$/.envs/aws" />
+      <excludeFolder url="file://$MODULE_DIR$/.envs/sign" />
+      <excludeFolder url="file://$MODULE_DIR$/microservices/vexeroo/.env" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
