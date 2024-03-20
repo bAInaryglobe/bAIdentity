@@ -14,10 +14,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
+// import express from 'express';
+const cors_1 = __importDefault(require("cors"));
+const morgan_1 = __importDefault(require("morgan"));
+// import dotenv from 'dotenv';
+// import connect from './database/conn.js';
+const user_routes_1 = __importDefault(require("./src/routes/user.routes"));
+const post_routes_1 = __importDefault(require("./src/routes/post.routes"));
+const swagger_js_1 = __importDefault(require("./swagger.js"));
 // ... your imports
 const auth_routes_1 = __importDefault(require("./src/routes/auth.routes"));
 const index_1 = __importDefault(require("./src/db/index")); // Assuming your connectDB function is within src/db
+dotenv_1.default.config();
 // const app = express();
 // ... your Apollo Server setup
 // Environment-based Config (example)
@@ -31,7 +39,16 @@ function startServer() {
             const app = (0, express_1.default)(); // Initialize Express app
             // ... (Your Apollo Server setup)
             // Apply auth routes
+            app.use(express_1.default.json());
+            app.use((0, cors_1.default)());
+            app.use((0, morgan_1.default)('tiny'));
+            app.disable('x-powered-by'); // less hackers know about our stack
+            app.get('/', (req, res) => {
+                res.status(201).json("Home GET Request");
+            });
             app.use('/api/auth', auth_routes_1.default);
+            app.use('/api/user', user_routes_1.default);
+            app.use('/api/post', post_routes_1.default);
             // Error Handling Middleware (Place this after other routes)
             app.use((err, req, res, next) => {
                 console.error('Unhandled error:', err);
@@ -40,9 +57,11 @@ function startServer() {
             // ... (Server Start with error handling)
             app.listen(PORT, () => {
                 console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`);
+                (0, swagger_js_1.default)(app, port);
             }).on('error', (err) => {
                 console.error('Server startup error:', err);
             });
+            (0, swagger_js_1.default)(app, port);
         }
         catch (error) {
             // ... (Your existing error handling logic)
@@ -197,3 +216,44 @@ startServer();
 // startServer();
 //
 //
+//
+//
+// import express from 'express';
+// import cors from 'cors';
+// import morgan from 'morgan';
+// import dotenv from 'dotenv';
+// import connect from './database/conn.js';
+// import userRouter from './router/user.js';
+// import postRouter from './router/post.js';
+// import swaggerDocs from './swagger.js'
+//
+// dotenv.config()
+// const app = express();
+// /** middlewares */
+// app.use(express.json());
+// app.use(cors());
+// app.use(morgan('tiny'));
+// app.disable('x-powered-by'); // less hackers know about our stack
+//
+// const port = process.env.PORT || 8080;
+// /** HTTP GET Request */
+// app.get('/', (req, res) => {
+//     res.status(201).json("Home GET Request");
+// });
+//
+// /** api routes */
+// app.use('/api/user', userRouter)
+// app.use('/api/post', postRouter)
+// /** start server only when we have valid connection */
+// connect().then(() => {
+//     try {
+//         app.listen(port, () => {
+//             console.log(`Server connected to http://localhost:${port}`);
+//         })
+//         swaggerDocs(app, port)
+//     } catch (error) {
+//         console.log('Cannot connect to the server')
+//     }
+// }).catch(error => {
+//     console.log("Invalid database connection...!");
+// })
