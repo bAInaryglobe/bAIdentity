@@ -13,18 +13,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const auth_routes_1 = __importDefault(require("./src/routes/auth.routes"));
 const dotenv_1 = __importDefault(require("dotenv"));
-// import express from 'express';
 const cors_1 = __importDefault(require("cors"));
 const morgan_1 = __importDefault(require("morgan"));
-// import dotenv from 'dotenv';
-// import connect from './database/conn.js';
 const user_routes_1 = __importDefault(require("./src/routes/user.routes"));
 const post_routes_1 = __importDefault(require("./src/routes/post.routes"));
-const swagger_js_1 = __importDefault(require("./swagger.js"));
-// ... your imports
-const auth_routes_1 = __importDefault(require("./src/routes/auth.routes"));
-const index_1 = __importDefault(require("./src/db/index")); // Assuming your connectDB function is within src/db
+const swagger_1 = __importDefault(require("./swagger"));
+const db_1 = require("./src/db/db");
 dotenv_1.default.config();
 // const app = express();
 // ... your Apollo Server setup
@@ -35,7 +31,7 @@ const PORT = process.env.PORT || 4000;
 function startServer() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            yield (0, index_1.default)();
+            yield (0, db_1.connectDB)();
             const app = (0, express_1.default)(); // Initialize Express app
             // ... (Your Apollo Server setup)
             // Apply auth routes
@@ -57,11 +53,11 @@ function startServer() {
             // ... (Server Start with error handling)
             app.listen(PORT, () => {
                 console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`);
-                (0, swagger_js_1.default)(app, port);
+                (0, swagger_1.default)(app, port);
             }).on('error', (err) => {
                 console.error('Server startup error:', err);
             });
-            (0, swagger_js_1.default)(app, port);
+            (0, swagger_1.default)(app, port);
         }
         catch (error) {
             // ... (Your existing error handling logic)

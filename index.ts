@@ -1,41 +1,15 @@
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-
-
-// import express from 'express';
-import cors from 'cors';
-import morgan from 'morgan';
-// import dotenv from 'dotenv';
-// import connect from './database/conn.js';
-import userRouter from './src/routes/user.routes';
-import postRouter from './src/routes/post.routes';
-import swaggerDocs from './swagger.js'
-
-
-// ... your imports
 import authRoutes from './src/routes/auth.routes';
-import connectDB from './src/db/index'; // Assuming your connectDB function is within src/db
-import { connectDB } from './src/db/db';
-
-
-
-import express from 'express';
 import bodyParser from 'body-parser'; // Assuming you're using this
-import { ApolloServer } from 'apollo-server-express';
-import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import mongoose from 'mongoose';
 import morgan from 'morgan';
-
-import authRoutes from './src/routes/auth.routes';
 import userRouter from './src/routes/user.routes';
 import postRouter from './src/routes/post.routes';
 import swaggerDocs from './swagger';
-import connectDB from './src/db/db';
-
-
+import { connectDB, client } from './src/db/db';
 
 
 dotenv.config();
