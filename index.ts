@@ -10,7 +10,7 @@ import userRouter from './src/routes/user.routes';
 import postRouter from './src/routes/post.routes';
 import swaggerDocs from './swagger';
 import { connectDB, client } from './src/db/db';
-
+import authMiddleware from "./src/middleware/auth.middleware";
 
 dotenv.config();
 
