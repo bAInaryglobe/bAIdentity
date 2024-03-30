@@ -1,4 +1,6 @@
 "use strict";
+// swagger.ts
+// import type { OpenAPIV3 } from '@types/swagger';
 Object.defineProperty(exports, "__esModule", { value: true });
 const swaggerSpec = {
     openapi: '3.0.3',

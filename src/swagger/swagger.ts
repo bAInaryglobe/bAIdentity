@@ -1,9 +1,14 @@
 // swagger.ts
-import type { OpenAPIV3 } from '@types/swagger';
+// import type { OpenAPIV3 } from '@types/swagger';
+
+import swaggerJsdoc from "swagger-jsdoc";
+import swaggerUi from 'swagger-ui-express';
+import express, { Request, Response } from 'express'; // Assuming you're using Express
 
 interface SwaggerSpec extends OpenAPIV3.Document {
     // You can optionally augment the interface with custom properties
 }
+
 
 const swaggerSpec: SwaggerSpec = {
     openapi: '3.0.3',

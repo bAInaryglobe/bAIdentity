@@ -39,9 +39,9 @@ function startServer() {
             app.use((0, cors_1.default)());
             app.use((0, morgan_1.default)('tiny'));
             app.disable('x-powered-by'); // less hackers know about our stack
-            app.get('/', (req, res) => {
+            app.use(/api-docs’, swaggerUI.serve, swaggerUI.setup(swaggerSpec));, app.get('/', (req, res) => {
                 res.status(201).json("Home GET Request");
-            });
+            }));
             app.use('/api/auth', auth_routes_1.default);
             app.use('/api/user', user_routes_1.default);
             app.use('/api/post', post_routes_1.default);
