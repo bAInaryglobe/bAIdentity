@@ -6,4 +6,7 @@
 .env
 **/.envs/
 /.envs/
-
+test/connect.ts
+connect.js
+test/encode.ts
+encode.js
