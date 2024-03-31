@@ -24,13 +24,13 @@ const options = {
                 description: "Local server"
             },
             {
-                url: "<your live url here>",
+                url: "https://bAIdentity.onrender.com/",
                 description: "Live server"
             },
         ]
     },
     // looks for configuration in specified directories
-    apis: ['./router/*.js'],
+    apis: ['src/routes/*.js'],
 };
 const swaggerSpec = (0, swagger_jsdoc_1.default)(options);
 // Type-safe Swagger Docs function

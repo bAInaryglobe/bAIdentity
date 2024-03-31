@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Application } from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import authRoutes from './src/routes/auth.routes';
 import bodyParser from 'body-parser'; // Assuming you're using this
@@ -12,6 +12,9 @@ import swaggerDocs from './swagger';
 import { connectDB, client } from './src/db/db';
 import authMiddleware from "./src/middleware/auth.middleware";
 
+import swaggerUI from 'swagger-ui-express';
+import swaggerSpec from './swagger'; // Assuming your swaggerSpec is a valid definition
+
 dotenv.config();
 
 // const app = express();
@@ -23,6 +26,7 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 const PORT = process.env.PORT || 4000;
 
 // ... your database connection function
+
 
 
 async function startServer() {

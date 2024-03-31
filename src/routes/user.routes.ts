@@ -1,5 +1,5 @@
 import express, { Router, Request, Response } from 'express';
-import { User } from '../models/user'; // Assuming you have a User model
+import User from '../models/user.model'; // Assuming you have a User model
 
 
 
@@ -138,7 +138,7 @@ router.route('/login').post(controller.verifyUser,controller.login); // login in
  *      404:
  *        description: Not Found
  *      500:
- *        desccription: Server Error
+ *        description: Server Error
  */
 router.route('/verify').post(controller.verifyUser, (req, res) => res.end()); // authenticate user
 
@@ -211,34 +211,279 @@ router.route('/update').put(controller.updateUser); // is use to update the user
 
 
 
+
+
+// import { Router } from 'express'; // Assuming you're using Express
+// import { controller } from './user.controller'; // Assuming your controller logic is here
 //
-// /** DELETE Methods */
-// /**
-//  * @openapi
-//  * '/api/user/{userId}':
-//  *  delete:
-//  *     tags:
-//  *     - User Controller
-//  *     summary: Delete user by Id
-//  *     parameters:
-//  *      - name: userId
-//  *        in: path
-//  *        description: The unique Id of the user
-//  *        required: true
-//  *     responses:
-//  *      200:
-//  *        description: Removed
-//  *      400:
-//  *        description: Bad request
-//  *      404:
-//  *        description: Not Found
-//  *      500:
-//  *        description: Server Error
-//  */
-// router.route('/:userId').delete(controller.deleteUser);
+// const router = Router();
+
+/** GET Method */
+/**
+ * @openapi
+ * '/api/user/account/tier':
+ *  get:
+ *     tags:
+ *     - User Controller
+ *     summary: Get user's account tier
+ *     responses:
+ *      200:
+ *        description: Successful retrieval
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: integer
+ *              enum: [1, 2, 3]
+ *      404:
+ *        description: User not found
+ *      500:
+ *        description: Server Error
+ */
+router.route('/account/tier').get(controller.getUserTier);
+
+/** POST Method */
+/**
+ * @openapi
+ * '/api/user/account/tier':
+ *  post:
+ *     tags:
+ *     - User Controller
+ *     summary: Update user's account tier
+ *     requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *           schema:
+ *             type: integer
+ *             enum: [1, 2, 3]
+ *     responses:
+ *      200:
+ *        description: Tier updated
+ *      400:
+ *        description: Invalid tier value
+ *      404:
+ *        description: User not found
+ *      500:
+ *        description: Server Error
+ */
+router.route('/account/tier').post(controller.updateUserTier);
 
 
 
+/** GET Method */
+/**
+ * @openapi
+ * '/api/user/username':
+ *  get:
+ *     tags:
+ *     - User Controller
+ *     summary: Get user ID by username
+ *     parameters:
+ *      - name: username
+ *        in: query
+ *        required: true
+ *        schema:
+ *          type: string
+ *     responses:
+ *      200:
+ *        description: Successful retrieval
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                userId:
+ *                  type: string
+ *      400:
+ *        description: Missing username parameter
+ *      404:
+ *        description: User not found
+ *      500:
+ *        description: Server Error
+ */
+router.route('/username').get(controller.getUserIdByUsername);
+
+/** PUT Method */
+/**
+ * @openapi
+ * '/api/user/username':
+ *  put:
+ *     tags:
+ *     - User Controller
+ *     summary: Change username
+ *     requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *           schema:
+ *            type: object
+ *            required:
+ *              - userId
+ *              - newUsername
+ *            properties:
+ *              userId:
+ *                type: string
+ *              newUsername:
+ *                type: string
+ *     responses:
+ *      200:
+ *        description: Username updated
+ *      400:
+ *        description: Bad Request (Invalid data)
+ *      404:
+ *        description: User not found
+ *      409:
+ *        description: Username already exists (Conflict)
+ *      500:
+ *        description: Server Error
+ */
+router.route('/username').put(controller.changeUsername);
+
+
+
+// ... (Your existing imports and routes) ...
+
+/** GET /user/email */
+/**
+ * @openapi
+ * '/api/user/email':
+ *  get:
+ *     tags:
+ *     - User Controller
+ *     summary: Get user email by userID
+ *     parameters:
+ *      - name: userId
+ *        in: query
+ *        required: true
+ *        schema:
+ *          type: string
+ *     responses:
+ *      200:
+ *        description: Successful retrieval
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                email:
+ *                  type: string
+ *      400:
+ *        description: Missing userId parameter
+ *      404:
+ *        description: User not found
+ *      500:
+ *        description: Server Error
+ */
+router.route('/email').get(controller.getUserEmail);
+
+/** PUT /user/email */
+/**
+ * @openapi
+ * '/api/user/email':
+ *  put:
+ *     tags:
+ *     - User Controller
+ *     summary: Change user email
+ *     requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *           schema:
+ *            type: object
+ *            required:
+ *              - userId
+ *              - newEmail
+ *            properties:
+ *              userId:
+ *                type: string
+ *              newEmail:
+ *                type: string
+ *     responses:
+ *      200:
+ *        description: Email updated
+ *      400:
+ *        description: Bad Request (Invalid data)
+ *      404:
+ *        description: User not found
+ *      409:
+ *        description: Email already exists (Conflict)
+ *      500:
+ *        description: Server Error
+ */
+router.route('/email').put(controller.changeUserEmail);
+
+// ... (Rest of your file) ...
+
+// ... (Your existing imports and routes) ...
+
+/** GET /user/phone */
+/**
+ * @openapi
+ * '/api/user/phone':
+ *  get:
+ *     tags:
+ *     - User Controller
+ *     summary: Get user phone number by userID
+ *     parameters:
+ *      - name: userId
+ *        in: query
+ *        required: true
+ *        schema:
+ *          type: string
+ *     responses:
+ *      200:
+ *        description: Successful retrieval
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                phoneNumber:
+ *                  type: string
+ *      400:
+ *        description: Missing userId parameter
+ *      404:
+ *        description: User not found
+ *      500:
+ *        description: Server Error
+ */
+router.route('/phone').get(controller.getUserPhoneNumber);
+
+/** PUT /user/phone */
+/**
+ * @openapi
+ * '/api/user/phone':
+ *  put:
+ *     tags:
+ *     - User Controller
+ *     summary: Change user phone number
+ *     requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *           schema:
+ *            type: object
+ *            required:
+ *              - userId
+ *              - newPhoneNumber
+ *            properties:
+ *              userId:
+ *                type: string
+ *              newPhoneNumber:
+ *                type: string
+ *     responses:
+ *      200:
+ *        description: Phone number updated
+ *      400:
+ *        description: Bad Request (Invalid data)
+ *      404:
+ *        description: User not found
+ *      500:
+ *        description: Server Error
+ */
+router.route('/phone').put(controller.changeUserPhoneNumber);
+
+// ... (Rest of your file) ...
 
 
 export default router; // Assuming you want to export
@@ -276,3 +521,32 @@ export default router; // Assuming you want to export
 // router.get('/', (req, res) => {
 //     // ... your user fetching logic
 // });
+
+
+
+
+//
+// /** DELETE Methods */
+// /**
+//  * @openapi
+//  * '/api/user/{userId}':
+//  *  delete:
+//  *     tags:
+//  *     - User Controller
+//  *     summary: Delete user by Id
+//  *     parameters:
+//  *      - name: userId
+//  *        in: path
+//  *        description: The unique Id of the user
+//  *        required: true
+//  *     responses:
+//  *      200:
+//  *        description: Removed
+//  *      400:
+//  *        description: Bad request
+//  *      404:
+//  *        description: Not Found
+//  *      500:
+//  *        description: Server Error
+//  */
+// router.route('/:userId').delete(controller.deleteUser);
