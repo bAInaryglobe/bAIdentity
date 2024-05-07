@@ -1,0 +1,19 @@
+ apiVersion: apps/v1
+ kind: Deployment
+ metadata:
+   name: django-app
+ spec:
+   replicas: 2  # Adjust for desired scaling
+   selector:
+     matchLabels:
+       app: django-app
+   template:
+     metadata:
+       labels:
+         app: django-app
+     spec:
+       containers:
+       - name: my-django-container
+         image: my-django-app
+         ports:
+         - containerPort: 8000

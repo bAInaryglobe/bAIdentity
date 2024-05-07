@@ -1,0 +1,5 @@
+/venv/
+# ./bAIdentity/bAIdentity/.env
+**/.env 
+**/.env.local
+
