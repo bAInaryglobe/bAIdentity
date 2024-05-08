@@ -1,2 +1,6 @@
 django
 python-environ
+djangorestframework
+djangorestframework-simplejwt
+django-filter
+django-cors-headers
